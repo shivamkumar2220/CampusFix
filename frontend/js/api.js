@@ -2,8 +2,14 @@
    api.js - every call to the backend goes through apiRequest()
    ===================================================================== */
 
-// Change this if your backend runs on another address or port
-const API_BASE_URL = "http://localhost:8000/api";
+// When the page is served by the backend itself (local uvicorn or the deployed site),
+// the API is on the same address, so a relative "/api" works everywhere.
+// When the page is opened as a file or from a separate dev server (e.g. port 5500),
+// fall back to the local backend on port 8000.
+const API_BASE_URL =
+    window.location.protocol === "file:" || window.location.port === "5500"
+        ? "http://localhost:8000/api"
+        : "/api";
 
 /**
  * Turn an error response from FastAPI into one readable sentence.
@@ -54,7 +60,7 @@ async function apiRequest(path, method = "GET", body = null, options = {}) {
             body: body ? JSON.stringify(body) : null,
         });
     } catch (networkError) {
-        throw new Error("Cannot reach the server. Is the backend running on http://localhost:8000?");
+        throw new Error("Cannot reach the server. Please check that the backend is running.");
     }
 
     // 204 No Content has no JSON body
