@@ -11,9 +11,11 @@ from typing import AsyncIterator
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.config import settings
+from app.database import initialize_database_if_empty
 from app.jobs.sla_escalation_job import create_sla_scheduler
 from app.routes import (
     auth_routes,
@@ -28,7 +30,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name
 
 @asynccontextmanager
 async def lifespan(application: FastAPI) -> AsyncIterator[None]:
-    """Start the background SLA scheduler when the server starts, stop it when it shuts down."""
+    """Create the tables on first start, start the SLA scheduler, and stop it on shutdown."""
+    initialize_database_if_empty()
     scheduler = create_sla_scheduler() if settings.enable_scheduler else None
     if scheduler:
         scheduler.start()
@@ -61,6 +64,12 @@ app.include_router(complaint_routes.router)
 app.include_router(user_routes.router)
 app.include_router(notification_routes.router)
 app.include_router(dashboard_routes.router)
+
+
+@app.get("/login", include_in_schema=False)
+def open_login_page() -> RedirectResponse:
+    """Short link to the login page."""
+    return RedirectResponse(url="/app/pages/login.html")
 
 
 @app.get("/", tags=["Health"])
