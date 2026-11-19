@@ -1,0 +1,25 @@
+# Web framework and server
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+
+# PostgreSQL driver (version 3) - the [binary] extra installs a ready-made driver, no compiler needed
+psycopg[binary]==3.2.3
+
+# Data validation (the [email] extra adds the EmailStr type)
+pydantic[email]==2.10.4
+
+# Login: JWT tokens and bcrypt password hashing
+python-jose[cryptography]==3.4.0
+passlib[bcrypt]==1.7.4
+# passlib 1.7.4 works best with bcrypt 4.0.x (newer versions print warnings or fail)
+bcrypt==4.0.1
+
+# Background jobs (SLA escalation)
+APScheduler==3.11.0
+
+# Reads settings from the .env file
+python-dotenv==1.0.1
+
+# Testing
+pytest==8.3.4
+httpx==0.28.1

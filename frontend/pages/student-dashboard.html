@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Complaints - CampusFix</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header id="app-header"></header>
+
+    <main class="page-container">
+        <div class="page-title-row">
+            <div>
+                <h1>My Complaints</h1>
+                <p class="muted">Report a campus problem and follow it until it is fixed.</p>
+            </div>
+        </div>
+
+        <section class="stats-grid" id="student-stats"></section>
+
+        <div class="two-column-layout">
+            <section class="card">
+                <div class="page-title-row" style="margin-bottom: 12px;">
+                    <h2>Complaint history</h2>
+                    <div class="form-group" style="margin: 0; min-width: 180px;">
+                        <label for="status-filter" class="hidden">Filter by status</label>
+                        <select id="status-filter" aria-label="Filter by status"></select>
+                    </div>
+                </div>
+                <div id="my-complaints-message" class="hidden"></div>
+                <div id="my-complaints-list" class="complaint-list"></div>
+            </section>
+
+            <section class="card" id="new-complaint">
+                <h2>New Complaint</h2>
+                <p class="muted" style="margin-top: 0; font-size: 0.88rem;">
+                    Category, priority and team are detected automatically from your description.
+                </p>
+                <div id="new-complaint-message" class="hidden"></div>
+                <form id="new-complaint-form" novalidate>
+                    <div class="form-group">
+                        <label for="complaint-title">Title</label>
+                        <input type="text" id="complaint-title" maxlength="150" placeholder="e.g. Wi-Fi not working in Lab 3" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="complaint-location">Location</label>
+                        <input type="text" id="complaint-location" maxlength="100" placeholder="e.g. Lab 3, Room 204, Library" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="complaint-description">Description</label>
+                        <textarea id="complaint-description" maxlength="2000" placeholder="What is wrong? Since when? Is there an exam or lab session affected?" required></textarea>
+                    </div>
+                    <button type="submit" class="button button-primary button-full" id="submit-complaint-button">Submit complaint</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/ui.js"></script>
+    <script src="../js/student-dashboard.js"></script>
+</body>
+</html>

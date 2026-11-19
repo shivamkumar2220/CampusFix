@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in - CampusFix</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <main class="auth-page">
+        <div class="auth-card">
+            <div class="brand">
+                <span class="brand-logo">CF</span>
+                <span class="brand-name">Campus<span>Fix</span></span>
+            </div>
+            <p class="auth-subtitle">Campus IT &amp; Facility Issue Management</p>
+
+            <div id="login-message" class="hidden"></div>
+
+            <form id="login-form" novalidate>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required autocomplete="email" placeholder="you@campusfix.edu">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="button button-primary button-full" id="login-button">Log in</button>
+            </form>
+
+            <p class="auth-footer">New student? <a href="register.html">Create an account</a></p>
+
+            <div class="test-accounts">
+                <strong>Test accounts</strong> (from seed.sql) - click to fill:<br>
+                <button type="button" class="link-button" data-email="student1@campusfix.edu" data-password="Student@123">Student</button> &middot;
+                <button type="button" class="link-button" data-email="it.staff@campusfix.edu" data-password="Staff@123">IT staff</button> &middot;
+                <button type="button" class="link-button" data-email="maint.staff@campusfix.edu" data-password="Staff@123">Maintenance staff</button> &middot;
+                <button type="button" class="link-button" data-email="admin@campusfix.edu" data-password="Admin@123">Admin</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/ui.js"></script>
+    <script src="../js/login.js"></script>
+</body>
+</html>
